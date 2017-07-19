@@ -18,7 +18,8 @@ export function fetchSession() {
       type: SESSION_NEW
     });
 
-    return axios.get('http://localhost:3001/api/session', {
+    const host = process.env.NODE_ENV === 'production' ? 'https://typingcourse.research.comnet.aalto.fi/v2/api' : 'http://localhost:3001'
+    return axios.get(`${host}/api/session'`, {
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('aalto-typingcourse-token')}`
       }
