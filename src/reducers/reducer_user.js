@@ -41,7 +41,7 @@ export default (state = initialState, action) =>  {
   case USER_REGISTER_SUCCESS:
     return _.merge({}, state, { registration: { isPosting: false, error: '', success: true } })
   case USER_REGISTER_FAILURE:
-    return _.merge({}, state, { registration: { isPosting: false, error: 'Something went wrong, please try again', success: false } })
+    return _.merge({}, state, { registration: { isPosting: false, error: 'Something went wrong, have you already created an account?', success: false } })
   case USER_REGISTER_RESET:
     return _.merge({}, state, { registration: { isPosting: false, error: '', success: null } })
   }

@@ -44,7 +44,12 @@ class Instructions extends Component {
     }
 
     const instructionsList = instructions ? instructions.map((instruction, i) => {
-      return <p key={i}>{instruction.text}</p>;
+    return (
+      <div key={i}>
+        <p>{instruction.text}</p>
+        {instruction.img ? <img src={instruction.img} width='700' /> : null}
+      </div>
+    );
     }) : null;
 
     return(
