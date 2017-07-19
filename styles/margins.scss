@@ -1,0 +1,15 @@
+@for $i from 1 through 5 {
+    .margin-top-#{$i * 5} {
+        margin-top: 5px * $i;
+    }
+
+    .margin-left-#{$i * 5} {
+        margin-left: 5px * $i;
+    }
+}
+
+@for $i from 1 through 5 {
+    .margin-top-#{$i * 50} {
+        margin-top: 50px * $i;
+    }
+}
