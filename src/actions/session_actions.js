@@ -18,7 +18,7 @@ export function fetchSession() {
       type: SESSION_NEW
     });
 
-    return axios.get('http://localhost:3000/api/session', {
+    return axios.get('http://localhost:3001/api/session', {
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('aalto-typingcourse-token')}`
       }

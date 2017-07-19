@@ -15,7 +15,7 @@ export function sendResults(results) {
       type: RESULTS_SENDING
     });
 
-    axios.post('http://localhost:3000/api/session', results, {
+    axios.post('http://localhost:3001/api/session', results, {
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('aalto-typingcourse-token')}`
       }

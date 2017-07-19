@@ -2,8 +2,8 @@
 module.exports = {
   entry: './src/index.js',
   output: {
-    path: __dirname + '/public',
-    publicPath: '/public',
+    path: __dirname + '/public/v2',
+    publicPath: '/public/v2',
     filename: 'bundle.js'
   },
   module: {
@@ -38,6 +38,6 @@ module.exports = {
   },
   devServer: {
     historyApiFallback: true,
-    contentBase: './public'
+    contentBase: './public/v2'
   }
 }
