@@ -23,7 +23,7 @@ class Intervention extends Component {
   componentDidMount() {
     setTimeout(() => {
       this.props.nextIntervention();
-      this.setState({redirect: '/instructions' });
+      this.setState({redirect: '/v2/instructions' });
     }, this.props.intervention.duration);
   }
 

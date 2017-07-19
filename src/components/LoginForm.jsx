@@ -32,7 +32,7 @@ class LoginForm extends Component {
 
   onRegisterButtonClick(event) {
     event.preventDefault();
-    this.setState({ redirect: '/registration' });
+    this.setState({ redirect: '/v2/registration' });
   }
 
   onEmailChange(event) {
@@ -41,7 +41,7 @@ class LoginForm extends Component {
 
   render() {
     if (this.props.isAuthenticated) {
-      return <Redirect to='/dashboard' />;
+      return <Redirect to='/v2/dashboard' />;
     }
 
     if (this.state.redirect) {

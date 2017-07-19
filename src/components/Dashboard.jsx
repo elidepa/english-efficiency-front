@@ -27,16 +27,16 @@ class Dashboard extends Component {
 
   newSessionButtonOnClick() {
     this.props.fetchSession();
-    this.setState({ redirect: '/instructions' });
+    this.setState({ redirect: '/v2/instructions' });
   }
 
   resultsButtonOnClick() {
-    this.setState({ redirect: '/results' });
+    this.setState({ redirect: '/v2/results' });
   }
 
   logoutButtonOnClick() {
     this.props.userLogout();
-    this.setState({ redirect: '/login' })
+    this.setState({ redirect: '/v2/login' })
   }
 
   render() {

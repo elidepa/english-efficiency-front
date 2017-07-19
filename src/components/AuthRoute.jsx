@@ -11,7 +11,7 @@ class AuthRoute extends Component {
       return <Route {...rest} component={component} />
     }
 
-    return <Redirect to='/login' />;
+    return <Redirect to='/v2/login' />;
   }
 }
 

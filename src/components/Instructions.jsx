@@ -20,7 +20,7 @@ class Instructions extends Component {
   }
 
   startButtonOnClick() {
-    this.setState({redirect: '/session'})
+    this.setState({redirect: '/v2/session'})
   }
 
   render() {
@@ -40,7 +40,7 @@ class Instructions extends Component {
       )
     } else if (sessionCompleted) {
       this.props.sendResults(this.props.results);
-      return <Redirect to='/results' />;
+      return <Redirect to='/v2/results' />;
     }
 
     const instructionsList = instructions ? instructions.map((instruction, i) => {
