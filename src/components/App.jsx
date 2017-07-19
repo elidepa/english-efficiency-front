@@ -13,13 +13,13 @@ export default class App extends Component {
     return(
       <BrowserRouter>
         <Switch>
-          <AuthRoute path='/dashboard' component={Dashboard} />
-          <AuthRoute path='/instructions' component={Instructions} />
-          <AuthRoute path='/session' component={Intervention} />
-          <Route path='/login' component={LoginForm} />
-          <Route path='/registration' component={RegistrationForm} />
+          <AuthRoute path='/v2/dashboard' component={Dashboard} />
+          <AuthRoute path='/v2/instructions' component={Instructions} />
+          <AuthRoute path='/v2/session' component={Intervention} />
+          <Route path='/v2/login' component={LoginForm} />
+          <Route path='/v2/registration' component={RegistrationForm} />
           <Route path='/'>
-            <Redirect to='/login' />
+            <Redirect to='/v2/login' />
           </Route>
         </Switch>
       </BrowserRouter>
