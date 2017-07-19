@@ -16,7 +16,7 @@ export function sendResults(results) {
     });
 
     const host = process.env.NODE_ENV === 'production' ? 'https://typingcourse.research.comnet.aalto.fi/v2/api' : 'http://localhost:3001'
-    axios.post(`${host}/api/session'`, results, {
+    axios.post(`${host}/api/session`, results, {
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('aalto-typingcourse-token')}`
       }

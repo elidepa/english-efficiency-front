@@ -20,7 +20,7 @@ export function userAuthenticate(credentials) {
     });
 
     const host = process.env.NODE_ENV === 'production' ? 'https://typingcourse.research.comnet.aalto.fi/v2/api' : 'http://localhost:3001'    
-    axios.post(`${host}/api/login'`, credentials).then(response => {
+    axios.post(`${host}/api/login`, credentials).then(response => {
       localStorage.setItem('aalto-typingcourse-token', response.data.token)
       dispatch({
         type: USER_LOGIN_SUCCESS,
@@ -51,7 +51,7 @@ export function userRegister(credentials) {
     });
 
     const host = process.env.NODE_ENV === 'production' ? 'https://typingcourse.research.comnet.aalto.fi/v2/api' : 'http://localhost:3001'    
-    axios.post(`${host}/api/user'`, credentials).then(response => {
+    axios.post(`${host}/api/user`, credentials).then(response => {
       dispatch({
         type: USER_REGISTER_SUCCESS
       });
