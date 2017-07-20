@@ -6,7 +6,7 @@ import { Redirect } from 'react-router';
 import { fetchSession } from '../actions/session_actions';
 import { sendResults } from '../actions/result_actions';
 
-import { Container, Dimmer, Loader, Header, Button } from 'semantic-ui-react';
+import { Container, Dimmer, Loader, Header, Button, Segment } from 'semantic-ui-react';
 
 class Instructions extends Component {
   constructor() {
@@ -50,7 +50,8 @@ class Instructions extends Component {
     const instructionsList = instructions ? instructions.map((instruction, i) => {
     return (
       <div key={i}>
-        <p>{instruction.text}</p>
+        {instruction.explanation ? <div style={{marginBottom: '25px'}}><Segment secondary>{instruction.explanation}</Segment></div> : null}
+        {instruction.text ? <p>{instruction.text}</p> : null}
         {instruction.img ? <img src={instruction.img} width='700' /> : null}
       </div>
     );
@@ -63,10 +64,9 @@ class Instructions extends Component {
             Instructions
           </Header>
           {instructionsList}
-          <div className='margin-top-25'>
+          <div className='margin-top-25' style={{ paddingBottom: '100px'}}>
             <Button onClick={this.startButtonOnClick}>Start</Button>
           </div>
-          <div className='margin-top-50'></div>
         </Container>
       </div>
     )
