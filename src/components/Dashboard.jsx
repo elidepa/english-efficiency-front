@@ -44,6 +44,8 @@ class Dashboard extends Component {
       return <Redirect to={this.state.redirect} />;
     }
 
+    const errorSegment = this.props.error ? <Segment color='red'>{this.props.error}</Segment> : null;
+
     return(
       <div className='margin-top-50'>
         <Container>
@@ -54,6 +56,7 @@ class Dashboard extends Component {
             <Header as='h1'>
               Welcome back!
             </Header>
+            {errorSegment}
             <Segment secondary>
               Participation in this course will improve your typing skills. Please perform the exercises diligently,
               and your typing performance will increase and you will make less typing errors. You will be able to
@@ -77,4 +80,10 @@ const mapDispatchToProps = dispatch => {
   return bindActionCreators({userLogout, resetSession, fetchSession}, dispatch);
 }
 
-export default connect(null, mapDispatchToProps)(Dashboard);
+const mapStateToProps = state => {
+  return {
+    error: state.session.config.error
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

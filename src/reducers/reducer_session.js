@@ -3,6 +3,7 @@ import {
   SESSION_INIT,
   SESSION_NEW, 
   SESSION_RESET, 
+  SESSION_TOO_EARLY,
   
   SESSION_NEXT_INTERVENTION, 
   SESSION_NEXT_SECTION,
@@ -17,7 +18,8 @@ import {
 const initialState = {
   config: {
     isFetching: false,
-    interventions: []
+    interventions: [],
+    error: ''
   },
   status: {
     currentIntervention: 0,
@@ -41,7 +43,8 @@ export default (state = initialState, action) =>  {
   case SESSION_NEW:
     return _.merge({}, state, { 
       config: {
-        isFetching: true
+        isFetching: true,
+        error: ''
       }
     });
 
@@ -59,6 +62,16 @@ export default (state = initialState, action) =>  {
       },
       results
     });
+  }
+
+  case SESSION_TOO_EARLY: {
+    const nextDate = new Date(action.payload.nextSession)
+    return _.merge({}, state, {
+      config: {
+        isFetching: false,
+        error: `The next session is not ready yet. Please come back after ${nextDate.toLocaleString()}.`
+      }
+    })
   }
 
   case SESSION_NEXT_INTERVENTION: {
@@ -82,7 +95,7 @@ export default (state = initialState, action) =>  {
   }
 
   case SESSION_RESET:
-    return initialState;
+    return _.merge({}, initialState, { config: { error: state.config.error } });
 
   case RESULTS_PUSH_SECTION: {
     checkAndInitResultSections();

@@ -9,7 +9,9 @@ import {
   USER_REGISTER_POSTING,
   USER_REGISTER_SUCCESS,
   USER_REGISTER_FAILURE,
-  USER_REGISTER_RESET
+  USER_REGISTER_RESET,
+
+  SESSION_EXPIRED
 } from '../actions/action_types';
 
 const initialState = {
@@ -30,6 +32,8 @@ export default (state = initialState, action) =>  {
   switch (action.type) {
   case USER_LOGIN_SUCCESS:
     return _.merge({}, state, { auth: { isAuthenticated: true, isFetching: false, error: '' }, token: action.payload.token });
+  case SESSION_EXPIRED:
+    return _.merge({}, state, { auth: { isAuthenticated: false, isFetching: false, error: 'Your session has expired. Please login.' }, token: '' });
   case USER_LOGIN_FAILURE:
     return _.merge({}, state, { auth: { isAuthenticated: false, isFetching: false, error: 'Login failed. Please check your credentials.' }, token: '' });
   case USER_LOGIN_FETCHING:

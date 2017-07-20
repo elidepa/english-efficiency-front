@@ -30,6 +30,10 @@ class Instructions extends Component {
       return <Redirect to={this.state.redirect} />;
     }
 
+    if (this.props.error) {
+      return <Redirect to='/v2/dashboard' />
+    }
+
     if (isFetching) {
       return(
         <Container>
@@ -59,7 +63,10 @@ class Instructions extends Component {
             Instructions
           </Header>
           {instructionsList}
-          <Button onClick={this.startButtonOnClick}>Start</Button>
+          <div className='margin-top-25'>
+            <Button onClick={this.startButtonOnClick}>Start</Button>
+          </div>
+          <div className='margin-top-50'></div>
         </Container>
       </div>
     )
@@ -72,6 +79,7 @@ const mapStateToProps = state => {
   const instructions = currentInterventionData ? currentInterventionData.instructions : undefined;
   return {
     isFetching: state.session.config.isFetching,
+    error: state.session.config.error,
     results: sessionCompleted ? state.session.results : null,
     sessionCompleted,
     instructions

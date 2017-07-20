@@ -2,7 +2,9 @@ import axios from 'axios';
 import { 
   SESSION_RESET, 
   SESSION_NEW, 
-  SESSION_INIT, 
+  SESSION_INIT,
+  SESSION_TOO_EARLY,
+  SESSION_EXPIRED,
 
   SESSION_NEXT_INTERVENTION, 
   SESSION_NEXT_SECTION,
@@ -11,6 +13,7 @@ import {
   RESULTS_PUSH_DISTRACTIONS,
   RESULTS_PUSH_SECTION
 } from './action_types';
+import { userLogout } from './user_actions'
 
 export function fetchSession() {
   return dispatch => {
@@ -24,9 +27,23 @@ export function fetchSession() {
         'Authorization': `Bearer ${localStorage.getItem('aalto-typingcourse-token')}`
       }
     }).then((response) => {
+      if (response.data.interventions.tooEarly) {
+        dispatch({
+          type: SESSION_TOO_EARLY,
+          payload: {
+            nextSession: response.data.interventions.nextSession
+          }
+        })
+      }
       dispatch({
         type: SESSION_INIT,
         payload: response.data
+      });
+    }).catch((err) => {
+      console.log(err);
+      dispatch(userLogout());
+      dispatch({
+        type: SESSION_EXPIRED
       });
     });
   }

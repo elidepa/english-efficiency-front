@@ -8,6 +8,7 @@ import { nextIntervention } from '../actions/session_actions';
 import ShiftOfAttention from './interventions/ShiftOfAttention.jsx';
 import MotorControl from './interventions/MotorControl.jsx';
 import VisualSearch from './interventions/VisualSearch.jsx';
+import Typingtest from './interventions/Typingtest.jsx';
 
 import { Container } from 'semantic-ui-react';
 
@@ -21,10 +22,12 @@ class Intervention extends Component {
   }
 
   componentDidMount() {
-    setTimeout(() => {
-      this.props.nextIntervention();
-      this.setState({redirect: '/v2/instructions' });
-    }, this.props.intervention.duration);
+    if (this.props.intervention && this.props.intervention.type !== 'T') {
+      setTimeout(() => {
+        this.props.nextIntervention();
+        this.setState({redirect: '/v2/instructions' });
+      }, this.props.intervention.duration);
+    }
   }
 
   render() {
@@ -42,6 +45,13 @@ class Intervention extends Component {
             return <MotorControl />;
           case 'V':
            return <VisualSearch />;
+          case 'T':
+            return <Typingtest
+              endTest={() => {
+                this.props.nextIntervention();
+                this.setState({redirect: '/v2/instructions' });
+              }}   
+            />
           }
         })(this.props.intervention ? this.props.intervention.type : null)}
       </div>
