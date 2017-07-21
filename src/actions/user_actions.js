@@ -10,6 +10,7 @@ import {
   USER_REGISTER_FAILURE,
   USER_REGISTER_RESET
 } from './action_types';
+import logger from '../logger';
 
 export function userAuthenticate(credentials) {
 
@@ -19,15 +20,29 @@ export function userAuthenticate(credentials) {
       type: USER_LOGIN_FETCHING
     });
 
-    const host = process.env.NODE_ENV === 'production' ? 'https://typingcourse.research.comnet.aalto.fi/v2/api' : 'http://localhost:3001'    
+    const host = process.env.NODE_ENV === 'production' ? 'https://typingcourse.research.comnet.aalto.fi/v2/api' : 'http://localhost:3001';
+    logger.debug(`logging user ${credentials.email} in, host=${host}`);
     axios.post(`${host}/api/login`, credentials).then(response => {
       localStorage.setItem('aalto-typingcourse-token', response.data.token)
+      logger.debug(`login successful`)
       dispatch({
         type: USER_LOGIN_SUCCESS,
         payload: response.data
       });
     }).catch(error => {
-      console.log(error);
+      logger.error(`error logging in`);
+      if (err.reponse) {
+        logger.error(`got response`)
+        logger.error(`response: ${err.response}`);
+        logger.error(`response body: ${err.response.data}`);
+        logger.error(`response status: ${err.reponse.status}`);
+        logger.error(`response headers: ${err.reponse.headers}`);
+      } else if (err.request) {
+        logger.error(`didn't get response`);
+        logger.error(`${err.request}`);
+      } else {
+        logger(`${err}`);
+      }
       dispatch({
         type: USER_LOGIN_FAILURE,
         payload: error
@@ -50,8 +65,10 @@ export function userRegister(credentials) {
       type: USER_REGISTER_POSTING
     });
 
-    const host = process.env.NODE_ENV === 'production' ? 'https://typingcourse.research.comnet.aalto.fi/v2/api' : 'http://localhost:3001'    
+    const host = process.env.NODE_ENV === 'production' ? 'https://typingcourse.research.comnet.aalto.fi/v2/api' : 'http://localhost:3001';
+    logger.debug(`creating new user ${credentials.email}, host=${host}`)
     axios.post(`${host}/api/user`, credentials).then(response => {
+      logger.debug(`user created successfully`);
       dispatch({
         type: USER_REGISTER_SUCCESS
       });
@@ -59,7 +76,19 @@ export function userRegister(credentials) {
         type: USER_REGISTER_RESET
       });
     }).catch(error => {
-      console.log(error);
+      logger.error(`error creating new user`);
+      if (err.reponse) {
+        logger.error(`got response`)
+        logger.error(`response: ${err.response}`);
+        logger.error(`response body: ${err.response.data}`);
+        logger.error(`response status: ${err.reponse.status}`);
+        logger.error(`response headers: ${err.reponse.headers}`);
+      } else if (err.request) {
+        logger.error(`didn't get response`);
+        logger.error(`${err.request}`);
+      } else {
+        logger(`${err}`);
+      }
       dispatch({
         type: USER_REGISTER_FAILURE,
         payload: error

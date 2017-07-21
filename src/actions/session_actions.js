@@ -13,7 +13,8 @@ import {
   RESULTS_PUSH_DISTRACTIONS,
   RESULTS_PUSH_SECTION
 } from './action_types';
-import { userLogout } from './user_actions'
+import { userLogout } from './user_actions';
+import logger from '../logger';
 
 export function fetchSession() {
   return dispatch => {
@@ -21,12 +22,14 @@ export function fetchSession() {
       type: SESSION_NEW
     });
 
-    const host = process.env.NODE_ENV === 'production' ? 'https://typingcourse.research.comnet.aalto.fi/v2/api' : 'http://localhost:3001'
+    const host = process.env.NODE_ENV === 'production' ? 'https://typingcourse.research.comnet.aalto.fi/v2/api' : 'http://localhost:3001';
+    logger.debug(`fetching new session, host=${host}`);
     return axios.get(`${host}/api/session`, {
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('aalto-typingcourse-token')}`
       }
     }).then((response) => {
+      logger.debug(`new session fetched succesfully`)
       if (response.data.interventions.tooEarly) {
         dispatch({
           type: SESSION_TOO_EARLY,
@@ -40,7 +43,19 @@ export function fetchSession() {
         payload: response.data
       });
     }).catch((err) => {
-      console.log(err);
+      logger.error(`error fetching new session`);
+      if (err.reponse) {
+        logger.error(`got response`)
+        logger.error(`response: ${err.response}`);
+        logger.error(`response body: ${err.response.data}`);
+        logger.error(`response status: ${err.reponse.status}`);
+        logger.error(`response headers: ${err.reponse.headers}`);
+      } else if (err.request) {
+        logger.error(`didn't get response`);
+        logger.error(`${err.request}`);
+      } else {
+        logger(`${err}`);
+      }
       dispatch(userLogout());
       dispatch({
         type: SESSION_EXPIRED
