@@ -16,7 +16,7 @@ export function sendResults(results) {
       type: RESULTS_SENDING
     });
 
-    const host = process.env.NODE_ENV === 'production' ? 'https://typingcourse.research.comnet.aalto.fi/v2/api' : 'http://localhost:3001';
+    const host = process.env.NODE_ENV === 'production' ? 'http://typingcourse.research.comnet.aalto.fi/v2/api' : 'http://localhost:3001';
     logger.debug(`posting results, host=${host}`);
     axios.post(`${host}/api/session`, results, {
       headers: {

@@ -20,7 +20,7 @@ export function userAuthenticate(credentials) {
       type: USER_LOGIN_FETCHING
     });
 
-    const host = process.env.NODE_ENV === 'production' ? 'https://typingcourse.research.comnet.aalto.fi/v2/api' : 'http://localhost:3001';
+    const host = process.env.NODE_ENV === 'production' ? 'http://typingcourse.research.comnet.aalto.fi/v2/api' : 'http://localhost:3001';
     logger.debug(`logging user ${credentials.email} in, host=${host}`);
     axios.post(`${host}/api/login`, credentials).then(response => {
       localStorage.setItem('aalto-typingcourse-token', response.data.token)
@@ -65,7 +65,7 @@ export function userRegister(credentials) {
       type: USER_REGISTER_POSTING
     });
 
-    const host = process.env.NODE_ENV === 'production' ? 'https://typingcourse.research.comnet.aalto.fi/v2/api' : 'http://localhost:3001';
+    const host = process.env.NODE_ENV === 'production' ? 'http://typingcourse.research.comnet.aalto.fi/v2/api' : 'http://localhost:3001';
     logger.debug(`creating new user ${credentials.email}, host=${host}`)
     axios.post(`${host}/api/user`, credentials).then(response => {
       logger.debug(`user created successfully`);
@@ -75,7 +75,7 @@ export function userRegister(credentials) {
       dispatch({
         type: USER_REGISTER_RESET
       });
-    }).catch(error => {
+    }).catch(err => {
       logger.error(`error creating new user`);
       if (err.reponse) {
         logger.error(`got response`)
@@ -91,7 +91,7 @@ export function userRegister(credentials) {
       }
       dispatch({
         type: USER_REGISTER_FAILURE,
-        payload: error
+        payload: err
       });
     });
 

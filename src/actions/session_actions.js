@@ -22,7 +22,7 @@ export function fetchSession() {
       type: SESSION_NEW
     });
 
-    const host = process.env.NODE_ENV === 'production' ? 'https://typingcourse.research.comnet.aalto.fi/v2/api' : 'http://localhost:3001';
+    const host = process.env.NODE_ENV === 'production' ? 'http://typingcourse.research.comnet.aalto.fi/v2/api' : 'http://localhost:3001';
     logger.debug(`fetching new session, host=${host}`);
     return axios.get(`${host}/api/session`, {
       headers: {
