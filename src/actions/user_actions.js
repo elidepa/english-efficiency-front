@@ -29,7 +29,7 @@ export function userAuthenticate(credentials) {
         type: USER_LOGIN_SUCCESS,
         payload: response.data
       });
-    }).catch(error => {
+    }).catch(err => {
       logger.error(`error logging in`);
       if (err.reponse) {
         logger.error(`got response`)
@@ -45,7 +45,7 @@ export function userAuthenticate(credentials) {
       }
       dispatch({
         type: USER_LOGIN_FAILURE,
-        payload: error
+        payload: err
       })
     })
   }
