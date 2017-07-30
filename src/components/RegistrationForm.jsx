@@ -53,7 +53,7 @@ class RegistrationForm extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.success) {
-      document.location = 'https://www.webropolsurveys.com/S/7014BD072A120748.par';
+      document.location = 'https://www.webropolsurveys.com/S/851C926E023CA957.par';
     }
   }
 
