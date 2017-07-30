@@ -19,14 +19,27 @@ class Intervention extends Component {
     this.state = {
       redirect: undefined
     };
+
+    this.handleBackspace = this.handleBackspace.bind(this)
   }
 
   componentDidMount() {
+    document.body.addEventListener('keydown', this.handleBackspace);
     if (this.props.intervention && this.props.intervention.type !== 'T') {
       setTimeout(() => {
         this.props.nextIntervention();
         this.setState({redirect: '/v2/instructions' });
       }, this.props.intervention.duration);
+    }
+  }
+
+  componentWillUnmount() {
+    document.body.removeEventListener('keydown', this.handleBackspace);
+  }
+
+  handleBackspace(event) {
+    if (event.key === 'Backspace' && event.target.tagName.toUpperCase() === 'BODY') {
+      event.preventDefault();
     }
   }
 

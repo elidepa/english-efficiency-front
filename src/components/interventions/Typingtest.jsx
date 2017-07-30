@@ -19,6 +19,7 @@ class Typingtest extends Component {
     return(
       <Container>
         <div className='margin-top-250'>
+          <div>{this.props.currentSection + 1}/35</div>
           <Form>
             <Form.Field>
               <input 

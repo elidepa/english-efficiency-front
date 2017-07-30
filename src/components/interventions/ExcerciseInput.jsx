@@ -69,6 +69,13 @@ class ExcerciseInput extends Component {
           }
         ] 
       });
+
+      // console.log({
+      //   key: event.key,
+      //   keydown: keydown.time,
+      //   keyup: Math.floor(performance.now()),
+      //   pressed: Math.floor(performance.now()) - keydown.time
+      // })
     }
   }
 
