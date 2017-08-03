@@ -7,6 +7,7 @@ import Dashboard from './Dashboard.jsx';
 import Instructions from './Instructions.jsx';
 import Intervention from './Intervention.jsx';
 import RegistrationForm from './RegistrationForm.jsx';
+import Results from './Results.jsx'
 
 export default class App extends Component {
   render() {
@@ -16,6 +17,7 @@ export default class App extends Component {
           <AuthRoute path='/v2/dashboard' component={Dashboard} />
           <AuthRoute path='/v2/instructions' component={Instructions} />
           <AuthRoute path='/v2/session' component={Intervention} />
+          <AuthRoute path='/v2/results' component={Results} />
           <Route path='/v2/login' component={LoginForm} />
           <Route path='/v2/registration' component={RegistrationForm} />
           <Route path='/'>

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
 
 import { fetchSession } from '../actions/session_actions';
-import { sendResults } from '../actions/result_actions';
+import { sendResults, fetchResults } from '../actions/result_actions';
 
 import { Container, Dimmer, Loader, Header, Button, Segment } from 'semantic-ui-react';
 
@@ -87,7 +87,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ fetchSession, sendResults }, dispatch);
+  return bindActionCreators({ fetchSession, sendResults, fetchResults }, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Instructions);

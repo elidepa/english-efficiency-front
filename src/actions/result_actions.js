@@ -38,12 +38,51 @@ export function sendResults(results) {
         logger.error(`didn't get response`);
         logger.error(`${err.request}`);
       } else {
-        logger(`${err}`);
+        logger.error(`${err}`);
       }
       dispatch({
         type: RESULTS_SEND_FAILURE,
         payload: err
       });
     });
+  }
+}
+
+export function fetchResults() {
+  return dispatch => {
+    dispatch({
+      type: RESULTS_FETCHING
+    });
+
+    const host = process.env.NODE_ENV === 'production' ? 'http://typingcourse.research.comnet.aalto.fi/v2/api' : 'http://localhost:3001';
+    logger.debug(`fetching results, host=${host}`);
+    axios.get(`${host}/api/results`, {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('aalto-typingcourse-token')}`
+      }
+    }).then((response) => {
+      dispatch({
+        type: RESULTS_FETCH_SUCCESS,
+        payload: response.data
+      })
+    }).catch((err) => {
+      logger.error(`error fetching results`);
+      if (err.reponse) {
+        logger.error(`got response`)
+        logger.error(`response: ${err.response}`);
+        logger.error(`response body: ${err.response.data}`);
+        logger.error(`response status: ${err.reponse.status}`);
+        logger.error(`response headers: ${err.reponse.headers}`);
+      } else if (err.request) {
+        logger.error(`didn't get response`);
+        logger.error(`${err.request}`);
+      } else {
+        logger.error(`${err}`);
+      }
+      dispatch({
+        type: RESULTS_FETCH_FAILURE,
+        payload: err
+      });
+    })
   }
 }
