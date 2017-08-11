@@ -16,8 +16,8 @@ class MCPracticePhase extends Component {
       leftBtnPressed: false,
       rightBtnPressed: false,
       otherKeyPressed: false,
-      leftBtn: bigram.slice(0,1),
-      rightBtn: bigram.slice(1,2),
+      leftBtn: bigram.slice(0,1).toUpperCase(),
+      rightBtn: bigram.slice(1,2).toUpperCase(),
       leftErr: false,
       rightErr: false,
       errorMsg: '',
@@ -40,7 +40,7 @@ class MCPracticePhase extends Component {
     }
     this.setState({ keydowns });
 
-    const { key } = event;
+    const key = event.key.toUpperCase();
     const { leftErr, rightErr, leftBtn, rightBtn, leftBtnPressed, rightBtnPressed } = this.state;
 
     if (!((key === leftBtn && leftBtnPressed) || (key === rightBtn && rightBtnPressed))) {
@@ -91,11 +91,13 @@ class MCPracticePhase extends Component {
   }
 
   handleKeyUp(event) {
-    const { key } = event;
+    const key = event.key.toUpperCase();
     const { rightErr, leftErr, leftBtn, rightBtn, leftBtnPressed, rightBtnPressed } = this.state;
     let correct = false;
 
     let stateChange = {};
+
+    console.log(key, rightBtn, leftBtn);
 
     if (rightBtnPressed && key === leftBtn) {
       // Correct step 3

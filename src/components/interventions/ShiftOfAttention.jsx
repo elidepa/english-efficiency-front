@@ -34,8 +34,8 @@ class ShiftOfAttention extends Component {
     this.setState({
       distractionTimer: setTimeout(() => {
         this.showDistraction();
-      // }, Math.random() * 4000 + 8000)
-      }, 3000)
+      }, Math.random() * 4000 + 6000)
+      // }, 3000)
     });
   }
 
