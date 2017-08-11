@@ -66,7 +66,7 @@ class Results extends Component {
 
       const avgReactionTimeRow = _.map(this.props.results, (session) => {
         if (!session.results.tErrorRate) {
-          return <Table.Cell key={`a-reaction-${session.date}`}>{session.results.avgReactionTime ? (Math.floor(session.results.avgReactionTime) / 1000).toFixed(2) +'s' : '-'}</Table.Cell>;
+          return <Table.Cell key={`a-reaction-${session.date}`}>{session.results.avgReactionTime ? (Math.floor(session.results.avgReactionTime) / 1000).toFixed(3) +'s' : '-'}</Table.Cell>;
         }
       });
       
@@ -80,7 +80,7 @@ class Results extends Component {
 
       const avgIKIRow = _.map(this.props.results, (session) => {
         if (!session.results.tErrorRate) {
-          return <Table.Cell key={`m-iki-${session.date}`}>{session.results.avgIKI  ? (Math.floor(session.results.avgIKI) / 1000).toFixed(2) + 's' : '-'}</Table.Cell>;
+          return <Table.Cell key={`m-iki-${session.date}`}>{session.results.avgIKI  ? (Math.floor(session.results.avgIKI) / 1000).toFixed(3) + 's' : '-'}</Table.Cell>;
         }
       });
 
@@ -100,7 +100,7 @@ class Results extends Component {
 
       const avgSearchTimeRow = _.map(this.props.results, (session) => {
         if (!session.results.tErrorRate) {
-          return <Table.Cell key={`v-search-${session.date}`}>{session.results.avgSearchTime ? (Math.floor(session.results.avgSearchTime) / 1000).toFixed(2) + 's' : '-'}</Table.Cell>;
+          return <Table.Cell key={`v-search-${session.date}`}>{session.results.avgSearchTime ? (Math.floor(session.results.avgSearchTime) / 1000).toFixed(3) + 's' : '-'}</Table.Cell>;
         }
       });
 

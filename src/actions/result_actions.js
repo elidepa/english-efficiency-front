@@ -26,6 +26,7 @@ export function sendResults(results) {
       dispatch({
         type: RESULTS_SEND_SUCCESS
       });
+      dispatch(fetchResults());
     }).catch((err) => {
       logger.error(`error sending new results`);
       if (err.reponse) {
