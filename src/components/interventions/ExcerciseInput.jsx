@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import _ from 'lodash';
 
 class ExcerciseInput extends Component {
   constructor() {
@@ -24,7 +25,7 @@ class ExcerciseInput extends Component {
   inputOnKeyDown(event) {
     let { keydowns, keystrokes, value } = this.state;
     // If enter is pressed, push keystrokes and section to results, increment section count
-    if (event.key === 'Enter') {
+    if (event.key === 'Enter' && !_.isEmpty(this.state.value)) {
       if (this.props.pushKeystrokes) {
         this.props.pushKeystrokes(keystrokes);
       }
