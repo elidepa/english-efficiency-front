@@ -14,12 +14,14 @@ class RegistrationForm extends Component {
       email: '',
       emailConfirmation: '',
       group: '1',
-      error: ''
+      error: '',
+      partTimer: 'full'
     }
 
     this.onInputChange = this.onInputChange.bind(this);
     this.onGroupChange = this.onGroupChange.bind(this);
     this.onFormSubmit = this.onFormSubmit.bind(this);
+    this.onEmploymentStatusChange = this.onEmploymentStatusChange.bind(this);
   }
 
   onInputChange(event) {
@@ -36,6 +38,13 @@ class RegistrationForm extends Component {
     });
   }
 
+  onEmploymentStatusChange(event) {
+    const { value } = event.target;
+    this.setState({
+      partTimer: value
+    });
+  }
+
   onFormSubmit(event) {
     const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     if (this.state.email !== this.state.emailConfirmation) {
@@ -43,8 +52,9 @@ class RegistrationForm extends Component {
     } else if (this.state.email.search(emailRegex)) {
       this.setState({ error: 'Please verify that the email address you gave is valid.' })
     } else {
-      const { email, group } = this.state
+      const { email, group, partTimer } = this.state
       this.props.userRegister({
+        partTimer,
         email,
         group
       })
@@ -88,6 +98,13 @@ class RegistrationForm extends Component {
                 <select value={this.state.group} onChange={this.onGroupChange}>
                   <option value='1'>1</option>
                   <option value='test'>Test user</option>
+                </select>
+              </Form.Field>
+              <Form.Field>
+                <label>What is your employment status?</label>
+                <select value={this.state.partTimer} onChange={this.onEmploymentStatusChange}>
+                  <option value='true'>Part-time</option>
+                  <option value='false'>Full-time</option>
                 </select>
               </Form.Field>
               <Button>
