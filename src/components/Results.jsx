@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import _ from 'lodash';
 
-import { fetchResults } from '../actions/result_actions'
+import { fetchResults } from '../actions/result_actions';
 
-import { Container, Table, Dimmer, Loader, Button, Header } from 'semantic-ui-react'
-import { Redirect } from 'react-router'
+import { Container, Table, Dimmer, Loader, Button, Header } from 'semantic-ui-react';
+import { Redirect } from 'react-router';
 
 class Results extends Component {
   constructor() {

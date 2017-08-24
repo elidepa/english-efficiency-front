@@ -9,6 +9,10 @@ import {
   SESSION_NEXT_INTERVENTION, 
   SESSION_NEXT_SECTION,
 
+  SESSIONS_FETCHING_DATES,
+  SESSIONS_FETCHING_DATES_FAILURE,
+  SESSIONS_FETCHING_DATES_SUCCESS,
+
   RESULTS_PUSH_KEYSTROKES,
   RESULTS_PUSH_DISTRACTIONS,
   RESULTS_PUSH_SECTION
@@ -54,7 +58,7 @@ export function fetchSession() {
         logger.error(`didn't get response`);
         logger.error(`${err.request}`);
       } else {
-        logger(`${err}`);
+        logger.error(`${err}`);
       }
       dispatch(userLogout());
       dispatch({
@@ -100,5 +104,40 @@ export function pushDistractions(distractions) {
   return {
     type: RESULTS_PUSH_DISTRACTIONS,
     payload: distractions
+  }
+}
+
+export function fetchSessionDates() {
+  return dispatch => {
+    dispatch({
+      type: SESSIONS_FETCHING_DATES
+    })
+
+    const host = process.env.NODE_ENV === 'production' ? 'http://typingcourse.research.comnet.aalto.fi/v2/api' : 'http://localhost:3001';
+    logger.debug(`fetching session dates, host=${host}`);
+    axios.get(`${host}/api/sessions`).then(response => {
+      logger.debug(`session dates fetched succesfully`)
+      dispatch({
+        type: SESSIONS_FETCHING_DATES_SUCCESS,
+        payload: response.data
+      })
+    }).catch(err => {
+      logger.error(`error fetching session dates`);
+      if (err.reponse) {
+        logger.error(`got response`)
+        logger.error(`response: ${err.response}`);
+        logger.error(`response body: ${err.response.data}`);
+        logger.error(`response status: ${err.reponse.status}`);
+        logger.error(`response headers: ${err.reponse.headers}`);
+      } else if (err.request) {
+        logger.error(`didn't get response`);
+        logger.error(`${err.request}`);
+      } else {
+        logger.error(`${err}`);
+      }
+      dispatch({
+        type: SESSIONS_FETCHING_DATES_FAILURE
+      })
+    })
   }
 }

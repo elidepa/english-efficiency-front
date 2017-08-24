@@ -75,6 +75,17 @@ class LoginForm extends Component {
               </Button>
             </Form>
           </div>
+          <div>
+            <a 
+              href='#' 
+              onClick={event => {
+                event.preventDefault();
+                this.setState({redirect: '/v2/overview'});
+              }}
+            >
+              Overview
+            </a>
+          </div>
         </Container>
       </div>
     );
