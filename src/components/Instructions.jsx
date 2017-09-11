@@ -17,6 +17,21 @@ class Instructions extends Component {
     }
 
     this.startButtonOnClick = this.startButtonOnClick.bind(this);
+    this.handleBackspace = this.handleBackspace.bind(this);
+  }
+
+  componentDidMount() {
+    document.body.addEventListener('keydown', this.handleBackspace);
+  }
+
+  componentWillUnmount() {
+    document.body.removeEventListener('keydown', this.handleBackspace);
+  }
+
+  handleBackspace(event) {
+    if (event.key === 'Backspace' && event.target.tagName.toUpperCase() === 'BODY') {
+      event.preventDefault();
+    }
   }
 
   startButtonOnClick() {

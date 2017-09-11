@@ -20,7 +20,7 @@ class Intervention extends Component {
       redirect: undefined
     };
 
-    this.handleBackspace = this.handleBackspace.bind(this)
+    this.handleBackspace = this.handleBackspace.bind(this);
   }
 
   componentDidMount() {

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import AuthRoute from './AuthRoute.jsx';
+import Mousetrap from 'mousetrap';
 
 import LoginForm from './LoginForm.jsx';
 import Dashboard from './Dashboard.jsx';
@@ -11,6 +12,14 @@ import Results from './Results.jsx';
 import Overview from './Overview.jsx';
 
 export default class App extends Component {
+  componentDidMount() {
+    Mousetrap.bind('alt+left', (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      return false;
+    })
+  }
+
   render() {
     return(
       <BrowserRouter>
