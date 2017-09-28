@@ -57,6 +57,8 @@ class Instructions extends Component {
           </Dimmer>
         </Container>
       )
+    } else if (sessionCompleted && this.props.lastSession) {
+      document.location = 'https://www.webropolsurveys.com/S/C03AF1A4C18C32E1.par';
     } else if (sessionCompleted) {
       this.props.sendResults(this.props.results);
       return <Redirect to='/v2/results' />;
@@ -96,6 +98,7 @@ const mapStateToProps = state => {
     isFetching: state.session.config.isFetching,
     error: state.session.config.error,
     results: sessionCompleted ? state.session.results : null,
+    lastSession: state.session.config.lastSession,
     sessionCompleted,
     instructions
   }

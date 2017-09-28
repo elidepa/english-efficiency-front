@@ -19,6 +19,7 @@ const initialState = {
   config: {
     isFetching: false,
     interventions: [],
+    lastSession: false,
     error: ''
   },
   status: {
@@ -58,6 +59,7 @@ export default (state = initialState, action) =>  {
     return _.merge({}, state, {
       config: {
         isFetching: false, 
+        lastSession: action.payload.lastSession,
         interventions: action.payload.interventions 
       },
       results
