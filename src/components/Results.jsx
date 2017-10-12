@@ -144,57 +144,59 @@ class Results extends Component {
               </Table.Body>
             </Table>
             <Header as='h2'>Training Sessions</Header>
-            <Table>
-              <Table.Header>
-                <Table.Row>
-                  <Table.HeaderCell>Session Date</Table.HeaderCell>
-                  {sessionDates}
-                </Table.Row>
-              </Table.Header>
-              <Table.Body>
-                <Table.Row>
-                  <Table.Cell width={sessionDates.length + 1}><strong>Shift of Attention</strong></Table.Cell>
-                </Table.Row>
-                <Table.Row>
-                  <Table.Cell>Words Per Minute</Table.Cell>
-                  {aWpmRow}
-                </Table.Row>
-                <Table.Row>
-                  <Table.Cell>Error Rate</Table.Cell>
-                  {aErrorRateRow}
-                </Table.Row>
-                <Table.Row>
-                  <Table.Cell>Avg Reaction Time</Table.Cell>
-                  {avgReactionTimeRow}
-                </Table.Row>
-                <Table.Row>
-                  <Table.Cell width={sessionDates.length + 1}><strong>Motor Control</strong></Table.Cell>
-                </Table.Row>
-                <Table.Row>
-                  <Table.Cell>Average Time Between Keystrokes (Milliseconds)</Table.Cell>
-                  {avgIKIRow}
-                </Table.Row>
-                <Table.Row>
-                  <Table.Cell>Number of Completed Letter Pairs</Table.Cell>
-                  {mTrialsRow}
-                </Table.Row>
-                <Table.Row>
-                  <Table.Cell width={sessionDates.length + 1}><strong>Visual Search</strong></Table.Cell>
-                </Table.Row>
-                <Table.Row>
-                  <Table.Cell>Average Search Time</Table.Cell>
-                  {avgSearchTimeRow}
-                </Table.Row>
-                <Table.Row>
-                  <Table.Cell>Error Rate</Table.Cell>
-                  {vErrorRateRow}
-                </Table.Row>
-                <Table.Row>
-                  <Table.Cell>Total Number of Keys Clicked</Table.Cell>
-                  {vTrialsRow}
-                </Table.Row>
-              </Table.Body>
-            </Table>
+            <div style={{ width: '1000px', height: '550px', overflowX: 'scroll' }}>
+              <Table>
+                <Table.Header>
+                  <Table.Row>
+                    <Table.HeaderCell>Session Date</Table.HeaderCell>
+                    {sessionDates}
+                  </Table.Row>
+                </Table.Header>
+                <Table.Body>
+                  <Table.Row>
+                    <Table.Cell width={sessionDates.length + 1}><strong>Shift of Attention</strong></Table.Cell>
+                  </Table.Row>
+                  <Table.Row>
+                    <Table.Cell>Words Per Minute</Table.Cell>
+                    {aWpmRow}
+                  </Table.Row>
+                  <Table.Row>
+                    <Table.Cell>Error Rate</Table.Cell>
+                    {aErrorRateRow}
+                  </Table.Row>
+                  <Table.Row>
+                    <Table.Cell>Avg Reaction Time</Table.Cell>
+                    {avgReactionTimeRow}
+                  </Table.Row>
+                  <Table.Row>
+                    <Table.Cell width={sessionDates.length + 1}><strong>Motor Control</strong></Table.Cell>
+                  </Table.Row>
+                  <Table.Row>
+                    <Table.Cell>Average Time Between Keystrokes (Milliseconds)</Table.Cell>
+                    {avgIKIRow}
+                  </Table.Row>
+                  <Table.Row>
+                    <Table.Cell>Number of Completed Letter Pairs</Table.Cell>
+                    {mTrialsRow}
+                  </Table.Row>
+                  <Table.Row>
+                    <Table.Cell width={sessionDates.length + 1}><strong>Visual Search</strong></Table.Cell>
+                  </Table.Row>
+                  <Table.Row>
+                    <Table.Cell>Average Search Time</Table.Cell>
+                    {avgSearchTimeRow}
+                  </Table.Row>
+                  <Table.Row>
+                    <Table.Cell>Error Rate</Table.Cell>
+                    {vErrorRateRow}
+                  </Table.Row>
+                  <Table.Row>
+                    <Table.Cell>Total Number of Keys Clicked</Table.Cell>
+                    {vTrialsRow}
+                  </Table.Row>
+                </Table.Body>
+              </Table>
+            </div>
             <Button onClick={() => { this.setState({redirect: 'dashboard'}) }}>Home</Button>
           </Container>
         </div>
