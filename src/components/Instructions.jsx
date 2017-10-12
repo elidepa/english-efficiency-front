@@ -39,7 +39,7 @@ class Instructions extends Component {
   }
 
   render() {
-    const {isFetching, sessionCompleted, instructions} = this.props;
+    const {isFetching, isSending, sessionCompleted, instructions} = this.props;
 
     if (this.state.redirect) {
       return <Redirect to={this.state.redirect} />;
@@ -49,7 +49,7 @@ class Instructions extends Component {
       return <Redirect to='/v2/dashboard' />
     }
 
-    if (isFetching) {
+    if (isFetching || isSending) {
       return(
         <Container>
           <Dimmer active inverted>
@@ -57,9 +57,10 @@ class Instructions extends Component {
           </Dimmer>
         </Container>
       )
-    } else if (sessionCompleted && this.props.lastSession) {
+    } else if (sessionCompleted && this.props.lastSession && !isSending) {
+      this.props.sendResults(this.props.results);
       document.location = 'https://www.webropolsurveys.com/S/C03AF1A4C18C32E1.par';
-    } else if (sessionCompleted) {
+    } else if (sessionCompleted && !this.props.lastSession) {
       this.props.sendResults(this.props.results);
       return <Redirect to='/v2/results' />;
     }
@@ -96,6 +97,7 @@ const mapStateToProps = state => {
   const instructions = currentInterventionData ? currentInterventionData.instructions : undefined;
   return {
     isFetching: state.session.config.isFetching,
+    isSending: state.session.config.isSending,
     error: state.session.config.error,
     results: sessionCompleted ? state.session.results : null,
     lastSession: state.session.config.lastSession,
