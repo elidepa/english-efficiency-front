@@ -144,7 +144,7 @@ class Results extends Component {
               </Table.Body>
             </Table>
             <Header as='h2'>Training Sessions</Header>
-            <div style={{ width: '1000px', height: '550px', overflowX: 'scroll' }}>
+            <div style={{ width: '1000px', height: '750px', overflowX: 'scroll' }}>
               <Table>
                 <Table.Header>
                   <Table.Row>
